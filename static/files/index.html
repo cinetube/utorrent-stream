@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+</style>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=892996750807543";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</head>
+<body>
+<ul>
+<li><a href="https://utorrentstream.com">uTorrent Homepage</a></li>
+<li><a href="https://utorrentstream.com/streaming-server-list/">Streaming Servers</a></li>
+<li><a href="https://utorrentstream.com/cloud-storage-server-list/">Cloud Storage</a></li>
+<li><a href="https://utorrentstream.com/faq">FAQ</a></li>
+<li style="float:right"><a href="https://utorrentstream.com/contact">Contact</a></li>
+</ul>
+</body>
+</html>
+<html ng-app="app" >
+	<head>
+		<title ng-bind="state.Stats.Title">uTorrent Stream</title>
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="google-site-verification" content="PqSTdiPeY8smrlFPrsHEAVAMf3cTY_vmy_3Hgal_Xzw" />
+		<meta content='utorrent stream,utorrent,stream,torrent,utorrentstream.com,torrent download,download,free' name='keywords'/>
+		<meta content='all' name='robots'/>
+                <meta content='index, follow' name='robots'/>
+		<meta content='English' name='language'/>
+		<link rel="stylesheet" type="text/css" href="css/Lato/Lato.css">
+		<link rel="stylesheet" type="text/css" href="css/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="css/app.css">
+		<link rel="icon" href="cloud-favicon.png" type="image/x-icon" />
+		<style type="text/css">[ng-cloak]{display: none;}</style>
+	</head>
+	<body class="app"><div ng-cloak class="cage">
+		<div ng-if="!connected" class="connect-warning ui inverted vertical masthead center aligned segment">
+			<div class="ui text container">
+			<h1 class="ui inverted header">
+				Disconnected
+			</h1>
+			<h1 class="ui inverted header">
+				<i class="red lightning icon"></i>
+			</h1>
+			</div>
+		</div>
+		<!-- TITLE ===================== -->
+		<div class="title">
+			<h2>
+				<a href="/"
+					target="_self"
+					ng-init="logoHover = false"
+					ng-mouseover="logoHover = true"
+					ng-mouseleave="logoHover = false">
+					<i class="blue icon" ng-class="{cloud:!logoHover, github: logoHover}"></i>  {{ state.Stats.Title }}
+				</a>
+			</h2>
+			<center><p><b>Please enter any query, Torrent URL or Magnet URI</b></p></center>
+			<div class="status">
+				<i ng-show="request.count > 0"
+					class="ui circular loading repeat icon"></i>
+				<i ng-click="$root.config.edit = !$root.config.edit;" ng-class="{green: $root.config.edit}"
+					class="ui circular server icon" style="font-size: 14px;"></i>
+				<i ng-click="$root.omni.edit = !$root.omni.edit;"
+					ng-class="{green: $root.omni.edit}"
+					class="ui circular magnet icon" style="font-size: 14px;"></i>
+				<i class="ui circular lightning icon"
+					ng-class="{ green: connected, red: !connected }"></i>
+			</div>
+		</div>
+		<!-- GLOBAL ERROR MESSAGE ===================== -->
+		<div ng-if="err" class="ui error message">
+			<i class="close icon" ng-click="$root.err = null"></i>
+			<div class="header">Error</div>
+			<p>{{err}}</p>
+		</div>
+
+		<section class="config" ng-controller="ConfigController" ng-include src="'template/config.html'"></section>
+		<section class="omni" ng-controller="OmniController" ng-include src="'template/omni.html'"></section>
+		<center><img src="https://utorrentstream.com/information.png" alt="Updates" ></center>
+		<section class="torrents" ng-controller="TorrentsController" ng-include src="'template/torrents.html'"></section>
+		<br>
+		<center><br><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Mobile Article Top Ad -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-3968645922999785"
+     data-ad-slot="8942294956"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+			</script></center>
+		<section class="downloads" ng-controller="DownloadsController" ng-include src="'template/downloads.html'"></section>
+
+		<footer>
+			<span><a href="https://www.uTorrentStream.com" target="_blank">uTorrentStream.com</a>  <a href="https://www.facebook.com/ParveenBhadoo" target="_blank">Made By Parveen Bhadoo</a></span>
+			<span><a>Online:</a></span>
+			<span ng-if="numKeys(state.Users) > 1">{{ numKeys(state.Users) }} users online.</span>
+		</footer>
+		<script src="js/vendor/query-string.js"></script>
+		<script src="js/vendor/angular.min.js"></script>
+		<script src="js/vendor/moment.min.js"></script>
+		<script src="/realtime.js"></script>
+		<script>window.app = window.angular.module('app', []);</script>
+		<script src="js/config-controller.js"></script>
+		<script src="js/omni-controller.js"></script>
+		<script src="js/torrents-controller.js"></script>
+		<script src="js/downloads-controller.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/semantic-checkbox.js"></script>
+		<script src="js/run.js"></script>
+	</div></body>
+</html>
+<br><center><form action="https://paypal.me/Factoogle" method="post" target="_top"><input alt="PayPal - The safer, easier way to pay online!" name="submit" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" type="image" /></form></center>
+<br><center><div class="fb-like" data-href="https://www.facebook.com/utorrentstreamcom-633076710191835/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div></center><br>
+<center><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Mobile Article Top Ad -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-3968645922999785"
+     data-ad-slot="8942294956"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Mobile Article Top Ad -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-3968645922999785"
+     data-ad-slot="8942294956"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></center>
+<center><script type="text/javascript"  charset="utf-8">
+// Place this code snippet near the footer of your page before the close of the /body tag
+// LEGAL NOTICE: The content of this website and all associated program code are protected under the Digital Millennium Copyright Act. Intentionally circumventing this code may constitute a violation of the DMCA.
+eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}(';k O=\'\',29=\'1V\';1L(k i=0;i<12;i++)O+=29.V(D.N(D.J()*29.F));k 2P=11,2w=4d,2s=4e,2k=4f,2R=B(t){k i=!1,o=B(){z(q.1n){q.2T(\'2C\',e);E.2T(\'28\',e)}S{q.2S(\'2B\',e);E.2S(\'2d\',e)}},e=B(){z(!i&&(q.1n||4c.2o===\'28\'||q.2K===\'2J\')){i=!0;o();t()}};z(q.2K===\'2J\'){t()}S z(q.1n){q.1n(\'2C\',e);E.1n(\'28\',e)}S{q.2A(\'2B\',e);E.2A(\'2d\',e);k n=!1;2y{n=E.4b==48&&q.1W}2X(a){};z(n&&n.2D){(B r(){z(i)G;2y{n.2D(\'19\')}2X(e){G 49(r,50)};i=!0;o();t()})()}}};E[\'\'+O+\'\']=(B(){k t={t$:\'1V+/=\',4a:B(e){k l=\'\',d,a,o,s,c,r,n,i=0;e=t.n$(e);1c(i<e.F){d=e.1a(i++);a=e.1a(i++);o=e.1a(i++);s=d>>2;c=(d&3)<<4|a>>4;r=(a&15)<<2|o>>6;n=o&63;z(2H(a)){r=n=64}S z(2H(o)){n=64};l=l+U.t$.V(s)+U.t$.V(c)+U.t$.V(r)+U.t$.V(n)};G l},14:B(e){k n=\'\',d,c,l,s,a,o,r,i=0;e=e.1A(/[^A-4g-4h-9\\+\\/\\=]/g,\'\');1c(i<e.F){s=U.t$.1G(e.V(i++));a=U.t$.1G(e.V(i++));o=U.t$.1G(e.V(i++));r=U.t$.1G(e.V(i++));d=s<<2|a>>4;c=(a&15)<<4|o>>2;l=(o&3)<<6|r;n=n+R.T(d);z(o!=64){n=n+R.T(c)};z(r!=64){n=n+R.T(l)}};n=t.e$(n);G n},n$:B(t){t=t.1A(/;/g,\';\');k n=\'\';1L(k i=0;i<t.F;i++){k e=t.1a(i);z(e<1r){n+=R.T(e)}S z(e>4n&&e<4o){n+=R.T(e>>6|4p);n+=R.T(e&63|1r)}S{n+=R.T(e>>12|35);n+=R.T(e>>6&63|1r);n+=R.T(e&63|1r)}};G n},e$:B(t){k i=\'\',e=0,n=4m=1s=0;1c(e<t.F){n=t.1a(e);z(n<1r){i+=R.T(n);e++}S z(n>4l&&n<35){1s=t.1a(e+1);i+=R.T((n&31)<<6|1s&63);e+=2}S{1s=t.1a(e+1);2Z=t.1a(e+2);i+=R.T((n&15)<<12|(1s&63)<<6|2Z&63);e+=3}};G i}};k r=[\'4i==\',\'4j\',\'4k=\',\'47\',\'46\',\'3T=\',\'3U=\',\'3V=\',\'3S\',\'3R\',\'3O=\',\'3P=\',\'3Q\',\'3W\',\'3X=\',\'43\',\'44=\',\'45=\',\'42=\',\'41=\',\'3Y=\',\'3Z=\',\'40==\',\'4q==\',\'4r==\',\'4R==\',\'3N=\',\'4T\',\'4Q\',\'4P\',\'4M\',\'4N\',\'4O\',\'4U==\',\'4V=\',\'52=\',\'53=\',\'51==\',\'4Z=\',\'4W\',\'4X=\',\'4Y=\',\'4L==\',\'4K=\',\'4x==\',\'4y==\',\'4z=\',\'4w=\',\'4v\',\'4s==\',\'4t==\',\'4u\',\'4A==\',\'4B=\'],f=D.N(D.J()*r.F),Y=t.14(r[f]),b=Y,C=1,y=\'#4H\',a=\'#4I\',g=\'#4J\',w=\'#4G\',L=\'\',W=\'4F 4C 4D 4E\',v=\'54 3L 3l 3k\\\'3j 3i 3n 2f 2v. 3p\\\'s 3g.  3b 3a\\\'t?\',u=\'3c 3d 3E-3I, 3u 3z\\\'t 3t 3v U 3w 3C.\',s=\'I 3K, I 3H 3G 3M 2f 2v.  39 3r 3o!\',i=0,p=0,n=\'3m.3h\',l=0,Q=e()+\'.34\';B h(t){z(t)t=t.1S(t.F-15);k n=q.2p(\'2n\');1L(k i=n.F;i--;){k e=R(n[i].1O);z(e)e=e.1S(e.F-15);z(e===t)G!0};G!1};B m(t){z(t)t=t.1S(t.F-15);k e=q.3f;x=0;1c(x<e.F){1p=e[x].1F;z(1p)1p=1p.1S(1p.F-15);z(1p===t)G!0;x++};G!1};B e(t){k i=\'\',e=\'1V\';t=t||30;1L(k n=0;n<t;n++)i+=e.V(D.N(D.J()*e.F));G i};B o(i){k o=[\'3B\',\'3F==\',\'3A\',\'3y\',\'2U\',\'3x==\',\'3D=\',\'3J==\',\'3s=\',\'3q==\',\'3e==\',\'4S==\',\'5a\',\'6w\',\'6x\',\'2U\'],a=[\'37=\',\'6A==\',\'6r==\',\'6a==\',\'61=\',\'6f\',\'6p=\',\'6q=\',\'37=\',\'6l\',\'6h==\',\'6g\',\'6c==\',\'6k==\',\'6j==\',\'6i=\'];x=0;1M=[];1c(x<i){c=o[D.N(D.J()*o.F)];d=a[D.N(D.J()*a.F)];c=t.14(c);d=t.14(d);k r=D.N(D.J()*2)+1;z(r==1){n=\'//\'+c+\'/\'+d}S{n=\'//\'+c+\'/\'+e(D.N(D.J()*20)+4)+\'.34\'};1M[x]=1Z 2a();1M[x].24=B(){k t=1;1c(t<7){t++}};1M[x].1O=n;x++}};B Z(t){};G{2O:B(t,a){z(6m q.K==\'6o\'){G};k i=\'0.1\',a=b,e=q.1b(\'1D\');e.1l=a;e.j.1k=\'1K\';e.j.19=\'-1o\';e.j.X=\'-1o\';e.j.1w=\'26\';e.j.13=\'6n\';k d=q.K.2h,r=D.N(d.F/2);z(r>15){k n=q.1b(\'2c\');n.j.1k=\'1K\';n.j.1w=\'1u\';n.j.13=\'1u\';n.j.X=\'-1o\';n.j.19=\'-1o\';q.K.6e(n,q.K.2h[r]);n.1d(e);k o=q.1b(\'1D\');o.1l=\'2j\';o.j.1k=\'1K\';o.j.19=\'-1o\';o.j.X=\'-1o\';q.K.1d(o)}S{e.1l=\'2j\';q.K.1d(e)};l=67(B(){z(e){t((e.1X==0),i);t((e.1U==0),i);t((e.1P==\'2Q\'),i);t((e.1N==\'2M\'),i);t((e.1H==0),i)}S{t(!0,i)}},2b)},1J:B(e,m){z((e)&&(i==0)){i=1;E[\'\'+O+\'\'].1C();E[\'\'+O+\'\'].1J=B(){G}}S{k u=t.14(\'66\'),c=q.62(u);z((c)&&(i==0)){z((2w%3)==0){k l=\'5Z=\';l=t.14(l);z(h(l)){z(c.1E.1A(/\\s/g,\'\').F==0){i=1;E[\'\'+O+\'\'].1C()}}}};k y=!1;z(i==0){z((2s%3)==0){z(!E[\'\'+O+\'\'].2r){k d=[\'68==\',\'69==\',\'6d=\',\'6s=\',\'6b=\'],s=d.F,a=d[D.N(D.J()*s)],n=a;1c(a==n){n=d[D.N(D.J()*s)]};a=t.14(a);n=t.14(n);o(D.N(D.J()*2)+1);k r=1Z 2a(),p=1Z 2a();r.24=B(){o(D.N(D.J()*2)+1);p.1O=n;o(D.N(D.J()*2)+1)};p.24=B(){i=1;o(D.N(D.J()*3)+1);E[\'\'+O+\'\'].1C()};r.1O=a;z((2k%3)==0){r.2d=B(){z((r.13<8)&&(r.13>0)){E[\'\'+O+\'\'].1C()}}};o(D.N(D.J()*3)+1);E[\'\'+O+\'\'].2r=!0};E[\'\'+O+\'\'].1J=B(){G}}}}},1C:B(){z(p==1){k C=2m.55(\'2l\');z(C>0){G!0}S{2m.6G(\'2l\',(D.J()+1)*2b)}};k c=\'6D==\';c=t.14(c);z(!m(c)){k h=q.1b(\'6B\');h.1Y(\'6C\',\'6u\');h.1Y(\'2o\',\'1m/6t\');h.1Y(\'1F\',c);q.2p(\'6z\')[0].1d(h)};6v(l);q.K.1E=\'\';q.K.j.16+=\'P:1u !17\';q.K.j.16+=\'1z:1u !17\';k L=q.1W.1U||E.2e||q.K.1U,f=E.6y||q.K.1X||q.1W.1X,r=q.1b(\'1D\'),b=e();r.1l=b;r.j.1k=\'2q\';r.j.19=\'0\';r.j.X=\'0\';r.j.13=L+\'1q\';r.j.1w=f+\'1q\';r.j.2u=y;r.j.21=\'6E\';q.K.1d(r);k d=\'<a 1F="6H://6I.6F" j="H-1f:10.5X;H-1i:1j-1h;1e:5o;">5n 5m 5k 5l-5p 2n</a>\';d=d.1A(\'5q\',e());d=d.1A(\'5v\',e());k o=q.1b(\'1D\');o.1E=d;o.j.1k=\'1K\';o.j.1B=\'1T\';o.j.19=\'1T\';o.j.13=\'5u\';o.j.1w=\'5t\';o.j.21=\'2t\';o.j.1H=\'.6\';o.j.36=\'38\';o.1n(\'5r\',B(){n=n.5s(\'\').5j().5i(\'\');E.2z.1F=\'//\'+n});q.1Q(b).1d(o);k i=q.1b(\'1D\'),M=e();i.1l=M;i.j.1k=\'2q\';i.j.X=f/7+\'1q\';i.j.5Y=L-59+\'1q\';i.j.58=f/3.5+\'1q\';i.j.2u=\'#56\';i.j.21=\'2t\';i.j.16+=\'H-1i: "57 5b", 1x, 1v, 1j-1h !17\';i.j.16+=\'5c-1w: 5h !17\';i.j.16+=\'H-1f: 5g !17\';i.j.16+=\'1m-1y: 1t !17\';i.j.16+=\'1z: 5f !17\';i.j.1P+=\'2x\';i.j.2i=\'1T\';i.j.5d=\'1T\';i.j.5e=\'2G\';q.K.1d(i);i.j.5w=\'1u 5x 5Q -5P 5O(0,0,0,0.3)\';i.j.1N=\'2V\';k x=30,Z=22,Y=18,Q=18;z((E.2e<2g)||(5M.13<2g)){i.j.2E=\'50%\';i.j.16+=\'H-1f: 5N !17\';i.j.2i=\'5R;\';o.j.2E=\'65%\';k x=22,Z=18,Y=12,Q=12};i.1E=\'<32 j="1e:#5S;H-1f:\'+x+\'1I;1e:\'+a+\';H-1i:1x, 1v, 1j-1h;H-1R:5W;P-X:1g;P-1B:1g;1m-1y:1t;">\'+W+\'</32><33 j="H-1f:\'+Z+\'1I;H-1R:5V;H-1i:1x, 1v, 1j-1h;1e:\'+a+\';P-X:1g;P-1B:1g;1m-1y:1t;">\'+v+\'</33><5U j=" 1P: 2x;P-X: 0.2Y;P-1B: 0.2Y;P-19: 23;P-2I: 23; 2F:5T 5L #5K; 13: 25%;1m-1y:1t;"><p j="H-1i:1x, 1v, 1j-1h;H-1R:2W;H-1f:\'+Y+\'1I;1e:\'+a+\';1m-1y:1t;">\'+u+\'</p><p j="P-X:5C;"><2c 5B="U.j.1H=.9;" 5A="U.j.1H=1;"  1l="\'+e()+\'" j="36:38;H-1f:\'+Q+\'1I;H-1i:1x, 1v, 1j-1h; H-1R:2W;2F-5y:2G;1z:1g;5z-1e:\'+g+\';1e:\'+w+\';1z-19:26;1z-2I:26;13:60%;P:23;P-X:1g;P-1B:1g;" 5D="E.2z.5E();">\'+s+\'</2c></p>\'}}})();E.2N=B(t,e){k a=5J.5I,o=E.5H,r=a(),n,i=B(){a()-r<e?n||o(i):t()};o(i);G{5F:B(){n=1}}};k 2L;z(q.K){q.K.j.1N=\'2V\'};2R(B(){z(q.1Q(\'27\')){q.1Q(\'27\').j.1N=\'2Q\';q.1Q(\'27\').j.1P=\'2M\'};2L=E.2N(B(){E[\'\'+O+\'\'].2O(E[\'\'+O+\'\'].1J,E[\'\'+O+\'\'].5G)},2P*2b)});',62,417,'|||||||||||||||||||style|var||||||document|||||||||if||function||Math|window|length|return|font||random|body|||floor|lxKpvihytPis|margin||String|else|fromCharCode|this|charAt||top||||||width|decode||cssText|important||left|charCodeAt|createElement|while|appendChild|color|size|10px|serif|family|sans|position|id|text|addEventListener|5000px|thisurl|px|128|c2|center|0px|geneva|height|Helvetica|align|padding|replace|bottom|wEChTYpaxJ|DIV|innerHTML|href|indexOf|opacity|pt|pQWePCSahl|absolute|for|spimg|visibility|src|display|getElementById|weight|substr|30px|clientWidth|ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789|documentElement|clientHeight|setAttribute|new||zIndex||auto|onerror||60px|babasbmsgx|load|AVAgLkAQzL|Image|1000|div|onload|innerWidth|ad|640|childNodes|marginLeft|banner_ad|IWAvshkjGV|babn|sessionStorage|script|type|getElementsByTagName|fixed|ranAlready|LRNCQgjUgi|10000|backgroundColor|blocker|ySPcPasvTK|block|try|location|attachEvent|onreadystatechange|DOMContentLoaded|doScroll|zoom|border|15px|isNaN|right|complete|readyState|XcQZtHeaZN|none|hCEWlqGSrq|PrMvHPRzLn|gEPJLJHbKe|hidden|sYFpdvRVwZ|detachEvent|removeEventListener|cGFydG5lcmFkcy55c20ueWFob28uY29t|visible|300|catch|5em|c3|||h3|h1|jpg|224|cursor|ZmF2aWNvbi5pY28|pointer|Let|doesn|Who|But|without|YWRzLnlhaG9vLmNvbQ|styleSheets|okay|kcolbdakcolb|using|re|you|like|moc|an|in|That|cHJvbW90ZS5wYWlyLmNvbQ|me|Y2FzLmNsaWNrYWJpbGl0eS5jb20|keep|we|making|site|YS5saXZlc3BvcnRtZWRpYS5ldQ|YWQuZm94bmV0d29ya3MuY29t|can|anVpY3lhZHMuY29t|YWRuLmViYXkuY29t|awesome|YWdvZGEubmV0L2Jhbm5lcnM|advertising|YWQubWFpbC5ydQ|disabled|have|income|YWR2ZXJ0aXNpbmcuYW9sLmNvbQ|understand|looks|my|RGl2QWQ|YWQtY29udGFpbmVyLTE|YWQtY29udGFpbmVyLTI|QWQzMDB4MTQ1|YWQtY29udGFpbmVy|YWQtZm9vdGVy|YWQtaW5uZXI|YWQtbGFiZWw|YWQtbGI|QWQzMDB4MjUw|QWQ3Mjh4OTA|QWRMYXllcjE|QWRMYXllcjI|QWRzX2dvb2dsZV8wMQ|QWRGcmFtZTQ|QWRGcmFtZTM|QWRBcmVh|QWRGcmFtZTE|QWRGcmFtZTI|YWQtaW1n|YWQtaGVhZGVy|null|setTimeout|encode|frameElement|event|175|271|253|Za|z0|YWQtbGVmdA|YWRCYW5uZXJXcmFw|YWQtZnJhbWU|191|c1|127|2048|192|QWRzX2dvb2dsZV8wMg|QWRzX2dvb2dsZV8wMw|cG9wdXBhZA|YWRzZW5zZQ|Z29vZ2xlX2Fk|YWRzbG90|YmFubmVyaWQ|IGFkX2JveA|YWRfY2hhbm5lbA|YWRzZXJ2ZXI|b3V0YnJhaW4tcGFpZA|c3BvbnNvcmVkX2xpbms|to|Factoogle|Torrent|Welcome|FFFFFF|EEEEEE|777777|adb8ff|YmFubmVyYWQ|YWRBZA|RGl2QWRB|RGl2QWRC|RGl2QWRD|RGl2QWQz|RGl2QWQy|QWRzX2dvb2dsZV8wNA|YWRzLnp5bmdhLmNvbQ|RGl2QWQx|QWRJbWFnZQ|QWREaXY|YmFubmVyX2Fk|YWRCYW5uZXI|YWRiYW5uZXI|YWRUZWFzZXI||Z2xpbmtzd3JhcHBlcg|QWRCb3gxNjA|QWRDb250YWluZXI|It|getItem|fff|Arial|minHeight|120|YWRzYXR0LmFiY25ld3Muc3RhcndhdmUuY29t|Black|line|marginRight|borderRadius|12px|16pt|normal|join|reverse|own|anti|your|Create|black|adblock|FILLVECTID1|click|split|40px|160px|FILLVECTID2|boxShadow|14px|radius|background|onmouseout|onmouseover|35px|onclick|reload|clear|LAbqQfHrJP|requestAnimationFrame|now|Date|CCC|solid|screen|18pt|rgba|8px|24px|45px|999|1px|hr|500|200|5pt|minWidth|Ly9wYWdlYWQyLmdvb2dsZXN5bmRpY2F0aW9uLmNvbS9wYWdlYWQvanMvYWRzYnlnb29nbGUuanM||c2t5c2NyYXBlci5qcGc|querySelector||||aW5zLmFkc2J5Z29vZ2xl|setInterval|Ly93d3cuZ29vZ2xlLmNvbS9hZHNlbnNlL3N0YXJ0L2ltYWdlcy9mYXZpY29uLmljbw|Ly93d3cuZ3N0YXRpYy5jb20vYWR4L2RvdWJsZWNsaWNrLmljbw|NzIweDkwLmpwZw|Ly93d3cuZG91YmxlY2xpY2tieWdvb2dsZS5jb20vZmF2aWNvbi5pY28|YmFubmVyX2FkLmdpZg|Ly9hZHZlcnRpc2luZy55YWhvby5jb20vZmF2aWNvbi5pY28|insertBefore|MTM2N19hZC1jbGllbnRJRDI0NjQuanBn|ZmF2aWNvbjEuaWNv|c3F1YXJlLWFkLnBuZw|YWR2ZXJ0aXNlbWVudC0zNDMyMy5qcGc|d2lkZV9za3lzY3JhcGVyLmpwZw|bGFyZ2VfYmFubmVyLmdpZg|YWQtbGFyZ2UucG5n|typeof|468px|undefined|YWRjbGllbnQtMDAyMTQ3LWhvc3QxLWJhbm5lci1hZC5qcGc|Q0ROLTMzNC0xMDktMTM3eC1hZC1iYW5uZXI|NDY4eDYwLmpwZw|Ly9hZHMudHdpdHRlci5jb20vZmF2aWNvbi5pY28|css|stylesheet|clearInterval|YWRzYXR0LmVzcG4uc3RhcndhdmUuY29t|YXMuaW5ib3guY29t|innerHeight|head|YmFubmVyLmpwZw|link|rel|Ly95dWkueWFob29hcGlzLmNvbS8zLjE4LjEvYnVpbGQvY3NzcmVzZXQvY3NzcmVzZXQtbWluLmNzcw|9999|com|setItem|http|blockadblock'.split('|'),0,{}));
+	</script></center>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: #4CAF50;
+}
+p {
+    text-indent: 50px;
+    text-align: justify;
+    letter-spacing: 3px;
+}
+a {
+    text-decoration:none;
+    color: #008CBA;
+}
+</style>
+</head>
+<body>
+<div style="width:100%;border:1px solid gray;padding:8px;">
+<h1>Important Information</h1>
+<p>Data on Streaming Server is not Permanent. Please Check out Cloud Server Solutions to download data safely. You are recommended to use VPN before downloading or using our server websites. WhatsApp support is available at +1 (518) 945-6026.
+</div>
+	<center><img src="https://utorrentstream.com/updates.png" alt="Updates" ></center>
+</body>
+<head>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #4CAF50;
+}
+</style>
+</head>
+<body>
+<ul>
+<li><a href="https://utorrentstream.com">uTorrent Homepage</a></li>
+<li><a href="https://utorrentstream.com/streaming-server-list/">Streaming Servers</a></li>
+<li><a href="https://utorrentstream.com/cloud-storage-server-list/">Cloud Storage</a></li>
+<li><a href="https://utorrentstream.com/faq">FAQ</a></li>
+<li style="float:right"><a href="https://utorrentstream.com/contact">Contact</a></li>
+</ul>
+</body>
+</html>

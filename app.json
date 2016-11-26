@@ -1,0 +1,15 @@
+{
+	"name": "uTorrent Stream",
+	"website": "https://utorrentstream.com",
+	"repository": "https://utorrentstream.com",
+	"env": {
+		"TITLE": {
+			"description": "Optionally set the title of this instance (defaults to 'uTorrent Stream')",
+			"required": false
+		},
+		"AUTH": {
+			"description": "Optional HTTP authentication in the form user:password",
+			"required": false
+		}
+	}
+}
