@@ -5,12 +5,14 @@
 
 
 **Visit utorrentstream.com to learn installing App**
+<br>
 <a href="https://utorrentstream.com">Website: uTorrentStream.com</a>
+<br>
 **Herkoku**
 
 Click this button to...
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Ffactoogle%2Futorrent-stream&template=https%3A%2F%2Fgithub.com%2Ffactoogle%2Futorrent-stream)
 
 ### Usage
 
