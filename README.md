@@ -1,22 +1,3 @@
-<img src="https://github.com/factoogle/utorrent-stream/blob/master/static/snapshot.PNG?raw=true" alt="screenshot"/>
-
-**uTorrent Stream** is a a self-hosted remote torrent client, written in Go (golang). You start torrents remotely, which are downloaded as sets of files on the local disk of the server, which are then retrievable or streamable via HTTP.
-
-
-
-**Visit utorrentstream.com to learn installing App**
-<br>
-<a href="https://utorrentstream.com">Website: uTorrentStream.com</a>
-<br>
-**Herkoku**
-
-Click this button to...
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Ffactoogle%2Futorrent-stream&template=https%3A%2F%2Fgithub.com%2Ffactoogle%2Futorrent-stream)
-
-### Usage
-
-```
 $ cloud-torrent --help
 
   Usage: cloud-torrent [options]
